@@ -1,0 +1,35 @@
+#playground {
+    width: 630px;
+    height: 630px;
+    background-color: black;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button {
+    margin: 0 auto;
+    display: block;
+}
+
+.square {
+    border: 2px solid white;
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.active {
+    background-color: aquamarine;
+}
+
+select {
+    color: black;
+    margin: 0 auto;
+    display: block;
+    cursor: pointer;
+}
