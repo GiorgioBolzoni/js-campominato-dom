@@ -13,13 +13,19 @@
 <body>
     <!-- contenitore -->
     <div id="app" class="d-flex flex-column">
-
+        <div class="d-flex justify-content-center flex-column text-center">
+            <h1 class="mt-3">Campo Minato</h1>
+            <div class="score d-flex justify-content-between">
+                <span class="score-label">SCORE</span>
+                <span class="score-counter">00000</span>
+            </div>
+        </div>
         <main id="playground">
             <div class=""></div>
         </main>
 
         <!-- bottone -->
-        <div class="d-flex">
+        <div class="d-flex bottoni">
             <button class="btn btn-success">Play</button>
             <select name="difficoltà" id="difficoltà" class="">
                 <option value="easy" class="btn-success" id="easy">Easy</option>

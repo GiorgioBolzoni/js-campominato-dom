@@ -28,7 +28,6 @@ const hard = document.getElementById('hard')
 
 
 
-
 const btn = document.querySelector('button');
 
 btn.addEventListener('click', function () {
@@ -37,6 +36,7 @@ btn.addEventListener('click', function () {
     // if (btn.classList.contains('btn-clicked')) return; per impedire di ricliccare
 
     //numero di quadratini da generare
+    // Preparo delle informazioni utili alla logica di gioco
     let numSquare;
 
     if (easy.selected) {
@@ -46,21 +46,20 @@ btn.addEventListener('click', function () {
     } else if (hard.selected) {
         numSquare = 49;
     };
-
-
-    // // Genero TOT bombe casuali
     const totalBombs = 16;
+    const maxScore = numSquare - totalBombs;
     const bombsList = [];
-    while (bombsList.length <= totalBombs) {
-        let bomb = getRndInteger(1, numSquare);
-        for (let i = 0; i < bombsList.length; i++) {
-            if (bombsList[i] !== bomb) {
-                bombsList.push(bomb);
-            }
-        }
+    let score = 0;
+    // Generare TOT bombe casuali
+    while (bombsList.length < totalBombs) {
+        const number = Math.floor(Math.random() * numSquare) + 1;
+        if (!bombsList.includes(number)) bombsList.push(number);
     }
     console.log(bombsList);
-    // oppure
+
+
+
+
     // switch (level) {
     //     case 'medium':
     //         numSquare = 81;
@@ -71,6 +70,12 @@ btn.addEventListener('click', function () {
     //     default:
     //         numSquare = 100;
     // }
+
+    // Genero TOT bombe casuali
+
+    // console.log(bombsList);
+    // oppure
+
 
 
     // mi prendo la griglia di gioco
@@ -96,9 +101,23 @@ btn.addEventListener('click', function () {
         square.innerHTML = squareIndex + 1;
         square.addEventListener('click', function () {
             square.classList.add('active');
-            console.log(this)
+            // ! Controllo che la cella non sia stata già cliccata
+            if (square.classList.contains('active')) return;
+            // console.log(this)
             square.style.color = 'black';
+
+
+            if (bombsList.includes(i)) {
+                // Se è una bomba....
+                square.classList.add('square-bomb');
+                endGame(false);
+            } else {
+                // Se non lo è...
+                square.classList.add('square-clicked');
+                updateScore();
+            }
         });
+
 
         return square;
     };
