@@ -11,6 +11,11 @@
     margin: 30px auto;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
+}
+
+.game-board {
+    position: relative;
 }
 
 .bottoni {
@@ -37,6 +42,45 @@ button {
 
 .active {
     background-color: aquamarine;
+}
+
+.end-game-screen {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 30%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.win {
+    background-image: url(https://images7.alphacoders.com/546/thumbbig-546701.webp);
+}
+
+.end-game-text {
+    font-size: 48px;
+    line-height: 1.2;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 16px;
+}
+
+h2 {
+    font-size: 3em;
+    font-weight: 900;
+}
+
+.square-bomb {
+    background-color: red;
+    color: black;
 }
 
 select {

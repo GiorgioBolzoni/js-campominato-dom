@@ -18,27 +18,23 @@ const option = document.querySelector('option')
 const easy = document.getElementById('easy')
 const medium = document.getElementById('medium')
 const hard = document.getElementById('hard')
-// const scoreCounter = document.querySelector('.score-counter');
-// const endGameScreen = document.querySelector('.end-game-screen');
-// const endGameText = document.querySelector('.end-game-text');
-
-// btn.addEventListener('click', play);
 
 
 
 
 
 const btn = document.querySelector('button');
+let numSquare;
+const totalBombs = 16;
+const bombsList = [];
 
 btn.addEventListener('click', function () {
 
     if (btn.classList.contains('btn-clicked')) location.reload();
     // if (btn.classList.contains('btn-clicked')) return; per impedire di ricliccare
 
-    //numero di quadratini da generare
-    // Preparo delle informazioni utili alla logica di gioco
-    let numSquare;
 
+    //numero di quadratini da generare
     if (easy.selected) {
         numSquare = 100;
     } else if (medium.selected) {
@@ -46,10 +42,7 @@ btn.addEventListener('click', function () {
     } else if (hard.selected) {
         numSquare = 49;
     };
-    const totalBombs = 16;
-    const maxScore = numSquare - totalBombs;
-    const bombsList = [];
-    let score = 0;
+
     // Generare TOT bombe casuali
     while (bombsList.length < totalBombs) {
         const number = Math.floor(Math.random() * numSquare) + 1;
@@ -57,32 +50,12 @@ btn.addEventListener('click', function () {
     }
     console.log(bombsList);
 
-
-
-
-    // switch (level) {
-    //     case 'medium':
-    //         numSquare = 81;
-    //         break;
-    //     case 'hard':
-    //         numSquare = 49;
-    //         break;
-    //     default:
-    //         numSquare = 100;
-    // }
-
-    // Genero TOT bombe casuali
-
-    // console.log(bombsList);
-    // oppure
-
-
-
     // mi prendo la griglia di gioco
     const playground = document.getElementById('playground');
     //ciclo per stampare i quadratini
 
-    for (let i = 0; i < numSquare; i++) {
+
+    for (let i = 1; i <= numSquare; i++) {
         //genero quadratino
         let square = drawSquare(i, numSquare);
         // console.log(square);
@@ -90,36 +63,62 @@ btn.addEventListener('click', function () {
         //appendo il quadratino alla griglia (playground)
         playground.append(square);
         btn.classList.add('btn-clicked');
-    };
-    function drawSquare(squareIndex, numSquare) {
-        let squareWidth = Math.sqrt(numSquare);
-        // console.log(squareWidth);
-        const square = document.createElement('div');
-        square.classList.add('square');
-        square.style.width = `calc(100% / ${squareWidth})`;
-        square.style.height = `calc(100% / ${squareWidth})`;
-        square.innerHTML = squareIndex + 1;
-        square.addEventListener('click', function () {
-            square.classList.add('active');
-            // ! Controllo che la cella non sia stata già cliccata
-            if (square.classList.contains('active')) return;
-            // console.log(this)
-            square.style.color = 'black';
 
+        function drawSquare(i, numSquare) {
+            let squareWidth = Math.sqrt(numSquare);
+            // console.log(squareWidth);
+            const square = document.createElement('div');
+            square.classList.add('square');
+            square.style.width = `calc(100% / ${squareWidth})`;
+            square.style.height = `calc(100% / ${squareWidth})`;
+            square.innerHTML = i;
+            square.addEventListener('click', function () {
+                // ! Controllo che la cella non sia stata già cliccata
+                if (square.classList.contains('active')) return;
+                if (square.classList.contains('square-bomb')) return;
+                // console.log(this)
+                square.style.color = 'black';
 
-            if (bombsList.includes(i)) {
-                // Se è una bomba....
-                square.classList.add('square-bomb');
-                endGame(false);
-            } else {
-                // Se non lo è...
-                square.classList.add('square-clicked');
-                updateScore();
-            }
-        });
+                if (bombsList.includes(i)) {
+                    // Se è una bomba....
+                    square.classList.add('square-bomb');
+                    revealAllBombs();
 
-
-        return square;
+                } else {
+                    // Se non lo è...
+                    square.classList.add('active');
+                    updateScore();
+                }
+            });
+            return square;
+        };
     };
 });
+// Funzione per aggiornare il punteggio
+function updateScore() {
+    let score = 0;
+    let scoreCounter = document.querySelector('.score-counter');
+    let maxScore = numSquare - totalBombs;
+
+    // Incremento lo score
+    score++;
+    // Lo inserisco nel contatore
+    scoreCounter.innerHTML = String(score).padStart(5, 0);
+    if (score === maxScore) return;
+}
+// // Funzione che rivela tutte le bombe
+function revealAllBombs() {
+    // Recupero tutte le celle
+    const square = document.querySelectorAll('.square');
+    for (let i = 1; i <= square.length; i++) {
+        //controllo se la cella è una bomba
+        if (bombsList.includes(i)) {
+            const squareToReveal = square[i - 1];
+            squareToReveal.classList.add('square-bomb');
+        }
+    }
+}
+
+
+
 
