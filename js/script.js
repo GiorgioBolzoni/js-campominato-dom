@@ -28,6 +28,10 @@ let numSquare;
 const totalBombs = 16;
 const bombsList = [];
 
+let score = 0;
+let scoreCounter = document.querySelector('.score-counter');
+let maxScore = numSquare - totalBombs;
+
 btn.addEventListener('click', function () {
 
     if (btn.classList.contains('btn-clicked')) location.reload();
@@ -75,7 +79,6 @@ btn.addEventListener('click', function () {
             square.addEventListener('click', function () {
                 // ! Controllo che la cella non sia stata già cliccata
                 if (square.classList.contains('active')) return;
-                if (square.classList.contains('square-bomb')) return;
                 // console.log(this)
                 square.style.color = 'black';
 
@@ -94,17 +97,15 @@ btn.addEventListener('click', function () {
         };
     };
 });
-// Funzione per aggiornare il punteggio
-function updateScore() {
-    let score = 0;
-    let scoreCounter = document.querySelector('.score-counter');
-    let maxScore = numSquare - totalBombs;
 
-    // Incremento lo score
+
+// Funzione per aggiornare il punteggio
+function updateScore(i) {
+
     score++;
     // Lo inserisco nel contatore
     scoreCounter.innerHTML = String(score).padStart(5, 0);
-    if (score === maxScore) return;
+    // if (score === maxScore) return;
 }
 // // Funzione che rivela tutte le bombe
 function revealAllBombs() {
