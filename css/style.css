@@ -2,13 +2,29 @@
     width: 630px;
     margin: 30px auto;
     margin-bottom: -20px;
+    color: rgb(255, 255, 255);
+    font-size: 2em;
+    font-weight: 600;
+}
+
+body {
+    background-image: url(https://c4.wallpaperflare.com/wallpaper/73/805/109/naruto-shippuuden-uzumaki-nagato-naruto-akatsuki-pein-wallpaper-preview.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    color: #b77014;
+    font-size: 5em;
+    font-weight: 900;
 }
 
 #playground {
     width: 630px;
     height: 630px;
     background-color: black;
-    margin: 30px auto;
+    margin: 20px auto;
+    background-color: transparent;
     display: flex;
     flex-wrap: wrap;
     position: relative;
@@ -30,13 +46,15 @@ button {
 }
 
 .square {
-    border: 2px solid white;
+    border: 2px solid rgba(39, 9, 9, 0.321);
     width: calc(100% / 10);
     height: calc(100% / 10);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    font-size: 1.2em;
     cursor: pointer;
 }
 
@@ -45,32 +63,45 @@ button {
 }
 
 .end-game-screen {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     opacity: 30%;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0; */
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+    font-size: 5em;
+    font-weight: 900;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 16px;
 }
 
 .win {
-    background-image: url(https://images7.alphacoders.com/546/thumbbig-546701.webp);
+    background-image: url(https://c4.wallpaperflare.com/wallpaper/802/72/24/naruto-pain-itachi-tobi-wallpaper-preview.jpg);
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    color: rgb(230, 196, 0);
 }
 
-.end-game-text {
-    font-size: 48px;
-    line-height: 1.2;
-    font-family: 'Press Start 2P', cursive;
-    margin-bottom: 16px;
+.game-over {
+    background-image: url(https://c4.wallpaperflare.com/wallpaper/700/964/867/naruto-akatsuki-naruto-pain-naruto-yahiko-naruto-hd-wallpaper-preview.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    color: rgb(230, 196, 0);
 }
 
 h2 {

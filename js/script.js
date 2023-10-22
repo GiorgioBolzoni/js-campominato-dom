@@ -27,14 +27,13 @@ const btn = document.querySelector('button');
 let numSquare;
 const totalBombs = 16;
 const bombsList = [];
-
 let score = 0;
 let scoreCounter = document.querySelector('.score-counter');
 let maxScore = numSquare - totalBombs;
 
 btn.addEventListener('click', function () {
 
-    if (btn.classList.contains('btn-clicked')) location.reload();
+    if (btn.classList.contains('btn-clicked')) window.location.reload();
     // if (btn.classList.contains('btn-clicked')) return; per impedire di ricliccare
 
 
@@ -81,16 +80,24 @@ btn.addEventListener('click', function () {
                 if (square.classList.contains('active')) return;
                 // console.log(this)
                 square.style.color = 'black';
-
+                let endGameScreen = document.querySelector('.end-game-screen')
                 if (bombsList.includes(i)) {
                     // Se è una bomba....
                     square.classList.add('square-bomb');
+                    // bombsLists.innerHTML = '<i class="fa-solid fa-bomb fa-beat" style="color: #ffffff;"></i>'
                     revealAllBombs();
-
+                    endGameScreen.classList.remove('d-none')
+                    endGameScreen.classList.add('game-over');
+                    endGameScreen.innerHTML = 'GAME<br>OVER';
                 } else {
                     // Se non lo è...
                     square.classList.add('active');
                     updateScore();
+                    if (score === maxScore) {
+                        endGameScreen.classList.remove('d-none')
+                        endGameScreen.classList.add('win');
+                        endGameScreen.innerHTML = 'YOU<br>WIN';
+                    }
                 }
             });
             return square;
@@ -101,7 +108,6 @@ btn.addEventListener('click', function () {
 
 // Funzione per aggiornare il punteggio
 function updateScore(i) {
-
     score++;
     // Lo inserisco nel contatore
     scoreCounter.innerHTML = String(score).padStart(5, 0);
@@ -119,6 +125,7 @@ function revealAllBombs() {
         }
     }
 }
+
 
 
 
